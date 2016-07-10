@@ -1,11 +1,46 @@
-import urllib2
+import requests
+import string
 
-URL = "https://www.realtor.ca/Residential/Map.aspx#CultureId=1&ApplicationId=1&RecordsPerPage=9&MaximumResults=9&PropertySearchTypeId=1&PriceMax=500000&TransactionTypeId=2&StoreyRange=0-0&BedRange=0-0&BathRange=0-0&LongitudeMin=-80.96712875366207&LongitudeMax=-79.67211532592769&LatitudeMin=43.127442225395875&LatitudeMax=43.68614055675253&SortOrder=A&SortBy=1&viewState=l&Longitude=-80.4928283691406&Latitude=43.4464569091797&CurrentPage=1&PropertyTypeGroupID=1"
+#def get_url():
+#    price_max = 500000
+#    longitude_min = -80.96712875366207
+#    longitude_max=-79.67211532592769
+#    latitude_min=43.127442225395875
+#    latitude_max=43.68614055675253
+#    longitude=-80.4928283691406
+#    latitude=43.4464569091797
+#    current_page=2
+#
+#    url = "https://www.realtor.ca/Residential/Map.aspx#CultureId=1&ApplicationId=1&RecordsPerPage=9&MaximumResults=9&PropertySearchTypeId=1&TransactionTypeId=2&StoreyRange=0-0&BedRange=0-0&BathRange=0-0&&SortOrder=A&SortBy=1&viewState=l&PropertyTypeGroupID=1"
+#
+#    url += string.join([
+#        "PriceMax=" + str(price_max),
+#        PriceMax=500000
+#LongitudeMin=-80.96712875366207
+#LongitudeMax=-79.67211532592769
+#LatitudeMin=43.127442225395875
+#LatitudeMax=43.68614055675253
+#Longitude=-80.4928283691406&
+#Latitude=43.4464569091797
+#CurrentPage=2
+#
+#    ], "&")
+#
+#    return url
+#
+#print get_url()
 
-# You need to do this, or https connections fail in mysterious ways.
-import socket
+#r = requests.get(get_url)
+#print r
 
-response = urllib2.urlopen(URL)
-print response.info()
-html = response.read()
-response.close()
+URL="https://www.realtor.ca/Residential/Map.aspx#CultureId=1&ApplicationId=1&RecordsPerPage=9&MaximumResults=9&PropertySearchTypeId=1&PriceMax=500000&TransactionTypeId=2&StoreyRange=0-0&BedRange=0-0&BathRange=0-0&LongitudeMin=-80.96712875366207&LongitudeMax=-79.67211532592769&LatitudeMin=43.127442225395875&LatitudeMax=43.68614055675253&SortOrder=A&SortBy=1&viewState=l&Longitude=-80.4928283691406&Latitude=43.4464569091797&CurrentPage=1&PropertyTypeGroupID=1"
+
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+driver = webdriver.Firefox()
+driver.get(URL)
+
+print driver.page_source
+
+driver.close()
