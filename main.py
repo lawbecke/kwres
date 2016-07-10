@@ -2,6 +2,11 @@ import requests
 import string
 import time
 
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+import listing
+
 def get_url():
     culture_id=1
     application_id=1
@@ -51,17 +56,27 @@ def get_url():
 
     return url
 
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
-driver = webdriver.Firefox()
-url = get_url()
-driver.get(url)
+if False:
+    driver = webdriver.Chrome()
+    url = get_url()
 
-# TODO - check how much sleeping is required.
-time.sleep(3)
-source = driver.execute_script("return document.documentElement.outerHTML")
+    driver.get(url)
 
-print source.encode('ascii', 'ignore')
+    # TODO - check how much sleeping is required.
+    time.sleep(3)
+    source = driver.execute_script("return document.documentElement.outerHTML")
 
-driver.close()
+    print source.encode('ascii', 'ignore')
+
+    driver.close()
+
+test_mls_data = [1,2,3]
+
+listings = {}
+
+for mls in test_mls_data:
+    listings[mls] = listing.Listing(mls)
+
+for mls, listing in listings.iteritems():
+    print listing.to_csv()
