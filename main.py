@@ -1,5 +1,6 @@
 import requests
 import string
+import time
 
 #def get_url():
 #    price_max = 500000
@@ -41,6 +42,9 @@ from selenium.webdriver.common.keys import Keys
 driver = webdriver.Firefox()
 driver.get(URL)
 
-print driver.page_source
+time.sleep(3)
+source = driver.execute_script("return document.documentElement.outerHTML")
+
+print source.encode('ascii', 'ignore')
 
 driver.close()
