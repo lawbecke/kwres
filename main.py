@@ -1,6 +1,7 @@
 import requests
 import string
 import time
+from random import randint
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -56,27 +57,26 @@ def get_url():
 
     return url
 
+listings = {}
 
-if False:
-    driver = webdriver.Chrome()
-    url = get_url()
+driver = webdriver.Chrome()
+url = get_url()
 
-    driver.get(url)
+driver.get(url)
 
-    # TODO - check how much sleeping is required.
-    time.sleep(3)
-    source = driver.execute_script("return document.documentElement.outerHTML")
+# TODO - check how much sleeping is required.
+time.sleep(3)
+source = driver.execute_script("return document.documentElement.outerHTML")
 
-    print source.encode('ascii', 'ignore')
+print source.encode('ascii', 'ignore')
 
-    driver.close()
+driver.close()
+
 
 test_mls_data = [1,2,3]
 
-listings = {}
-
 for mls in test_mls_data:
-    listings[mls] = listing.Listing(mls)
+    listings[mls] = listing.Listing(mls, randint(100000,500000))
 
 for mls, listing in listings.iteritems():
     print listing.to_csv()
